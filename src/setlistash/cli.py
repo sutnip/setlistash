@@ -15,6 +15,7 @@ from setlistash.api import (
     SetlistFMClient,
     SetlistFMError,
     UserNotFoundError,
+    check_latest_pypi_version,
 )
 from setlistash.config import (
     API_KEY_ENV_VAR,
@@ -98,6 +99,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--include-raw-json",
         action="store_true",
         help="Also save the complete raw API response list to raw_setlists.json.",
+    )
+    run_parser.add_argument(
+        "--no-update-check",
+        action="store_true",
+        help="Skip checking PyPI for a newer version of setlistash.",
     )
     run_parser.set_defaults(handler=handle_run)
 
@@ -235,6 +241,15 @@ def handle_run(args: argparse.Namespace) -> int:
     print(f"  Markdown  : {summary.setlists_dir}")
     if summary.raw_json_path is not None:
         print(f"  Raw JSON  : {summary.raw_json_path}")
+
+    if not args.no_update_check:
+        latest_version = check_latest_pypi_version(current_version=__version__)
+        if latest_version:
+            print(
+                f"\nUpdate available: setlistash {latest_version} "
+                f"(current: {__version__}). "
+                "Upgrade with: pipx upgrade setlistash"
+            )
 
     return 0
 

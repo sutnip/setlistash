@@ -28,6 +28,64 @@ class RateLimitError(SetlistFMError):
     """Raised when HTTP 429 retries are exhausted."""
 
 
+def _parse_version_tuple(version_str: str) -> tuple[int, ...] | None:
+    """Parse a dotted numeric version string into a comparable tuple."""
+    cleaned = version_str.strip()
+    if not cleaned:
+        return None
+    parts = cleaned.split(".")
+    if not all(part.isdigit() for part in parts):
+        return None
+    return tuple(int(part) for part in parts)
+
+
+def check_latest_pypi_version(
+    package_name: str = "setlistash",
+    current_version: str = __version__,
+    timeout: float = 1.5,
+) -> str | None:
+    """Return the latest PyPI version string if newer than current_version, else None.
+
+    Never raises network, timeout, or JSON parsing errors so CLI execution is never blocked.
+    """
+    url = f"https://pypi.org/pypi/{quote(package_name, safe='')}/json"
+    try:
+        response = requests.get(
+            url,
+            headers={
+                "Accept": "application/json",
+                "User-Agent": f"setlistash/{current_version}",
+            },
+            timeout=timeout,
+        )
+        if response.status_code != 200:
+            return None
+        payload = response.json()
+    except (requests.RequestException, ValueError):
+        return None
+
+    if not isinstance(payload, dict):
+        return None
+    info = payload.get("info")
+    if not isinstance(info, dict):
+        return None
+    latest_raw = info.get("version")
+    if not isinstance(latest_raw, str):
+        return None
+
+    latest_clean = latest_raw.strip()
+    current_tuple = _parse_version_tuple(current_version)
+    latest_tuple = _parse_version_tuple(latest_clean)
+
+    if current_tuple is not None and latest_tuple is not None:
+        max_len = max(len(current_tuple), len(latest_tuple))
+        cur_padded = current_tuple + (0,) * (max_len - len(current_tuple))
+        lat_padded = latest_tuple + (0,) * (max_len - len(latest_tuple))
+        return latest_clean if lat_padded > cur_padded else None
+
+    return latest_clean if latest_clean and latest_clean != current_version.strip() else None
+
+
 class SetlistFMClient:
     """Client for retrieving attended setlists from the Setlist.fm v1.0 API."""
 
