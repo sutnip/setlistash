@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
+requires = ["setuptools>=77.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,10 +7,11 @@ name = "setlistash"
 dynamic = ["version"]
 description = "Cross-platform CLI tool to create complete local CSV and Markdown backups of attended concerts from Setlist.fm."
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.10"
 authors = [
-    { name = "setlistash contributors" },
+    { name = "Leonardo Pintus (sutnip)" },
 ]
 keywords = [
     "setlistfm",
@@ -27,7 +28,6 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
     "Intended Audience :: End Users/Desktop",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -48,9 +48,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/YOUR_USERNAME/setlistash"
-Repository = "https://github.com/YOUR_USERNAME/setlistash"
-Issues = "https://github.com/YOUR_USERNAME/setlistash/issues"
+Homepage = "https://github.com/sutnip/setlistash"
+Repository = "https://github.com/sutnip/setlistash"
+Issues = "https://github.com/sutnip/setlistash/issues"
 
 [project.scripts]
 setlistash = "setlistash.cli:main"
