@@ -1,4 +1,8 @@
-# setlistash
+# Setlistash
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/sutnip/setlistash/main/assets/setlistash-banner.jpg" alt="setlistash CLI backup tool banner showing terminal output, CSV index, and Markdown setlist files" width="720">
+</p>
 
 `setlistash` is a cross-platform Python CLI tool that creates complete, non-destructive local backups of every attended concert saved in a [Setlist.fm](https://www.setlist.fm/) profile.
 
