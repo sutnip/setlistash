@@ -1,6 +1,13 @@
 # Setlistash
 
 <p align="center">
+  <a href="https://pypi.org/project/setlistash/"><img src="https://img.shields.io/pypi/v/setlistash?style=flat-square" alt="PyPI version"></a>
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square" alt="Supported platforms: Windows, macOS, Linux">
+  <img src="https://img.shields.io/pypi/pyversions/setlistash?style=flat-square" alt="Python versions">
+  <a href="LICENSE"><img src="https://img.shields.io/pypi/l/setlistash?style=flat-square" alt="License: MIT"></a>
+</p>
+
+<p align="center">
   <img src="https://raw.githubusercontent.com/sutnip/setlistash/main/assets/setlistash-banner.jpg" alt="setlistash CLI backup tool banner showing terminal output, CSV index, and Markdown setlist files" width="720">
 </p>
 
