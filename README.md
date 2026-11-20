@@ -175,6 +175,16 @@ url: "[https://www.setlist.fm/setlist/](https://www.setlist.fm/setlist/)..."
 
 If an event has no recorded tracks on Setlist.fm, the file explicitly states `*No setlist recorded on setlist.fm.*`.
 
+## Roadmap
+
+`setlistash` is actively maintained. Planned and exploratory features for upcoming releases include:
+
+- **Song-level index (`songs.csv`)** for querying individual tracks, covers, guests, and live debuts in spreadsheets.
+- **Offline statistics (`stats.md`)** summarizing top artists, venues, cities, songs, and yearly concert counts.
+- **Edited setlists backup** (`--source edited|both`) alongside attended concerts.
+- **Incremental sync / diff mode** to speed up repeat backups for large histories.
+- **PKM / Obsidian mode (`--wikilinks`)** for graph-ready Markdown links.
+
 ## License
 
 Released under the [MIT License](LICENSE).
